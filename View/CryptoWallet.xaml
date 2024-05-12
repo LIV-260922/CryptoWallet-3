@@ -1,0 +1,82 @@
+﻿<Page x:Class="CryptoWallet_3.View.CryptoWallet"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:CryptoWallet_3.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CryptoWallet">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="0.2*"/>
+            <RowDefinition Height ="0.3*"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White">
+            <Grid Grid.Column="0" >
+                <StackPanel >
+                    <TextBlock Background="LightBlue" MaxHeight="50" FontSize="25"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="*"/>
+                <ColumnDefinition Width ="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"  >
+                <Button Content="Отправить" MinWidth="150" Command ="{Binding SendButtonCommand}" HorizontalAlignment="Center" FontSize="20" />
+            </Grid>
+            <Grid Grid.Column="1" >
+                <Button Content="Получить" MinWidth="150" Command ="{Binding ReceiveButtonCommand}" HorizontalAlignment="Center" FontSize="20" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="Gray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Криптовалюта" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                <Grid Grid.Row="1" Margin="5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <DataGrid  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding _Currencies, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"   IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="auto"/>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <DataGrid  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding _Amount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"   IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Header="Количество"  Binding="{Binding AmountCurrencies}"  Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <DataGrid  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding _Rate, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"   IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Курc (USD)"   Binding="{Binding Rate}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
